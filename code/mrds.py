@@ -8,11 +8,11 @@ if __name__=='__main__':
 	writer=open('rf_collect.txt',"w+")
 
 	for fileName in os.listdir(curDir):
-		if os.path.splitext(fileName)[1]=='.fa':
+		if os.path.splitext(fileName)[1]=='.fasta':
 			f=open(fileName)
 			text=f.readlines()
 			idxs=range(1,int(len(text)/2))
-			sidxs=random.sample(idxs,20)
+			sidxs=random.sample(idxs,10)
 			
 			seqs=list()
 			for i in sidxs:

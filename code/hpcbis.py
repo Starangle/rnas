@@ -28,8 +28,10 @@ if __name__=='__main__':
 		s7=float(socContainer[7])
 		s8=float(socContainer[8])
 
+		s=max([s6,s7,s8])
+
 		dis=float(l1s[i].split()[-1])
-		if s6>bound or s7>bound or s8>bound:
+		if s>bound:
 			sumHighSoc+=dis
 			cntHighSoc+=1
 		else:
@@ -37,7 +39,7 @@ if __name__=='__main__':
 			cntLowSoc+=1
 
 		x.append(dis)
-		y.append(s8)
+		y.append(s)
 
 	print("the average distance in high socre families is %f" % (sumHighSoc/cntHighSoc))
 	print("the average distance in low socre families is %f" % (sumLowSoc/cntLowSoc))

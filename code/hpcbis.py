@@ -1,4 +1,5 @@
 # whether high performance caused by inner similarity
+
 import matplotlib.pyplot as plt
 
 if __name__=='__main__':
@@ -12,13 +13,6 @@ if __name__=='__main__':
 	f1.close()
 	f2.close()
 
-	sumHighSoc=0
-	cntHighSoc=0
-	sumLowSoc=0
-	cntLowSoc=0
-
-	bound=0.85
-
 	x=list()
 	y=list()
 
@@ -28,21 +22,33 @@ if __name__=='__main__':
 		s7=float(socContainer[7])
 		s8=float(socContainer[8])
 
-		s=max([s6,s7,s8])
-
 		dis=float(l1s[i].split()[-1])
-		if s>bound:
-			sumHighSoc+=dis
-			cntHighSoc+=1
-		else:
-			sumLowSoc+=dis
-			cntLowSoc+=1
+		s=max([s6,s7,s8])
 
 		x.append(dis)
 		y.append(s)
 
-	print("the average distance in high socre families is %f" % (sumHighSoc/cntHighSoc))
-	print("the average distance in low socre families is %f" % (sumLowSoc/cntLowSoc))
+	for bound in range(10):
+
+		sumHighSoc=0
+		cntHighSoc=0
+		sumLowSoc=0
+		cntLowSoc=0
+
+		for i in range(0,46):
+			
+			if y[i]>bound/10:
+				sumHighSoc+=x[i]
+				cntHighSoc+=1
+			else:
+				sumLowSoc+=x[i]
+				cntLowSoc+=1
+		try:
+			print("%.2f\t%.2f\t%.2f\t" % (bound/10,sumHighSoc/cntHighSoc,sumLowSoc/cntLowSoc))
+		except BaseException:
+			print("%.2f\t%.2f\t%.2f\t" % (bound/10,cntHighSoc,cntLowSoc))
+			
+
 
 	plt.scatter(x, y)
 	plt.show()

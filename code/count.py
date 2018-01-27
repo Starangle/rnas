@@ -11,13 +11,16 @@ if __name__=='__main__':
 	res=np.zeros([caseCount,caseCount])
 	resCount=np.zeros([caseCount,caseCount])
 
-	curRowNo=0
+	
 	with open(fileName) as f:
-		reader=csv.reader(f);
+		curRowNo=0
+		reader=csv.reader(f)
 		for row in reader:
-
 			rbc=int(curRowNo/countInFamily) #current row belongs to which case
-			for curColNo in range(0,curRowNo+1):
+			if rbc>=caseCount:
+				break
+			del row[0]
+			for curColNo in range(0,curRowNo):
 				cbc=int(curColNo/countInFamily) #current column belongs to which compare case
 				res[rbc,cbc]+=float(row[curColNo])
 				resCount[rbc,cbc]+=1
@@ -27,6 +30,7 @@ if __name__=='__main__':
 	cntInFamily=0
 	sumBetFamily=0
 	cntBetFamily=0
+
 	with open("res.txt","w+") as f:
 		for i in range(caseCount):
 			for j in range(i+1):

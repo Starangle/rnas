@@ -5,10 +5,10 @@ import random
 if __name__=='__main__':
 	curDir=os.getcwd()	#获取当前路径
 
-	writer=open('rf_collect.txt',"w+")
+	writer=open('rf_collect.fasta',"w+")
 
 	for fileName in os.listdir(curDir):
-		if os.path.splitext(fileName)[1]=='.fasta':
+		if os.path.splitext(fileName)[1]=='.fa':
 			f=open(fileName)
 			text=f.readlines()
 			idxs=range(1,int(len(text)/2))

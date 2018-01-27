@@ -30,34 +30,34 @@ if __name__=='__main__':
 		dis=float(l1s[i].split()[-1])
 		s=max([s6,s7,s8])
 		
+		s=s8
 
-		if s<0.9:
+		if s<0.8:
 			scnt+=1
-
 		x.append(dis)
 		y.append(s)
 
 	print(scnt)
 
-	for bound in range(10):
+	# for bound in range(10):
 
-		sumHighSoc=0
-		cntHighSoc=0
-		sumLowSoc=0
-		cntLowSoc=0
+	# 	sumHighSoc=0
+	# 	cntHighSoc=0
+	# 	sumLowSoc=0
+	# 	cntLowSoc=0
 
-		for i in range(0,46):
+	# 	for i in range(0,46):
 			
-			if y[i]>bound/10:
-				sumHighSoc+=x[i]
-				cntHighSoc+=1
-			else:
-				sumLowSoc+=x[i]
-				cntLowSoc+=1
-		# try:
-		# 	print("%.2f\t%.2f\t%.2f\t" % (bound/10,sumHighSoc/cntHighSoc,sumLowSoc/cntLowSoc))
-		# except BaseException:
-		# 	print("%.2f\t%.2f\t%.2f\t" % (bound/10,cntHighSoc,cntLowSoc))
+	# 		if y[i]>bound/10:
+	# 			sumHighSoc+=x[i]
+	# 			cntHighSoc+=1
+	# 		else:
+	# 			sumLowSoc+=x[i]
+	# 			cntLowSoc+=1
+	# 	try:
+	# 		print("%.2f\t%.2f\t%.2f\t" % (bound/10,sumHighSoc/cntHighSoc,sumLowSoc/cntLowSoc))
+	# 	except BaseException:
+	# 		print("%.2f\t%.2f\t%.2f\t" % (bound/10,cntHighSoc,cntLowSoc))
 			
 
 	# 计算相关系数
@@ -78,7 +78,14 @@ if __name__=='__main__':
 		c[i]=sum(c[i])/len(c[i]) 
 		c[i]/=s[i]
 
-	corr,pvalue=stats.pearsonr(c,y)
+	dc=[]
+	dy=[]
+	for i in range(46):
+		if s[i]>0.8:
+			dc.append(c[i])
+			dy.append(y[i])
+
+	corr,pvalue=stats.pearsonr(dc,dy)
 	print(corr)
 	print(pvalue)
 
